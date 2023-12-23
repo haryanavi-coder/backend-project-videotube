@@ -1,3 +1,145 @@
+
+
+
+
+
+*************************************************
+Lecture-5
+Data Modelling 
+
+what will be stored?
+username, password, pjhotos, dob, mobile no., etc.
+
+mongoose use kr rhe h
+data modelling k liye
+
+expensive:(used in coorporations)
+draw at moon modeler and it will give codes 
+moon modeler: https://www.datensen.com/data-modeling/moon-modeler-for-databases.html
+
+other options:
+eraser.io
+https://www.eraser.io/
+
+
+free option:
+pen and paper
+
+helper:
+prisma
+mongoose
+
+
+***********************************************************************************
+Lecture:- 10 (User and video model with hooks and JWT)
+
+index in modelling: to searching
+password is stored in database in encripted form, as db can get leaked
+
+mongo aggregation
+https://www.npmjs.com/package/mongoose-aggregate-paginate-v2
+
+mongoose middlewares pre, post 
+read from documentation
+
+based on crypography
+bcrypt  : used to hash the passwords
+jwt : for tokens
+
+cryptographic algorithms are used to encrypt/decrypt the passwords and tokens
+in them a secret key is used to make them unique
+
+to use them some mongoose hooks are used like pre (find more in mongoose>middleware>pre)
+userSchema.pre('save', callback)
+in this keep in mind not to wite arrow function as it don't have this (context) information
+
+to compare
+userSchema.methods.isPasswordCorrect
+
+
+JWT
+it is bearer token: what it means it that jiske pass hote h unko access de do
+jsonwebtoken
+
+serect ke liye shark 256, 
+
+we are using sessions and cookies both (added security)
+access token is not stored in db, but refresh are 
+
+both are written in same way, we will learn about them in upcomming lectures 
+
+
+similiarly inke liye bhi function likh do 
+userSchema.methods.generateAccessToken = function(){}
+userSchema.methods.generateRefreshToken = function(){}
+
+ek usename aa gya to querry kr sakte hain
+
+
+*****************************************************************************************************************************
+LECTURE- 10 (Multer: upload file in backend)
+
+pdf upload, image upload and all others 
+it is all work of backend engineers
+
+multer 
+it npm package 
+
+2 steps setting
+firstly upload file on using multer on local server
+then upload it to cloudinary
+
+many have diff folder as services for cloudinary
+we will use utils
+
+import fs from "fs"
+fs is file system
+it is in core nodejs
+
+search in unlink in documentation (nodejs documentation)
+
+
+now setup a middleware using multer
+read multer docs --github wale
+
+
+multer file middleware
+we can also have difff image ids 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 Why utils?
 24:50 of video custom api response
 
