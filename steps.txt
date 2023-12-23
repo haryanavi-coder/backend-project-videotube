@@ -1,0 +1,4 @@
+Why utils?
+24:50 of video custom api response
+
+wrapper function to make our life easy
