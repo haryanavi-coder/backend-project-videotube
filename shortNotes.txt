@@ -1,0 +1,249 @@
+
+
+
+
+
+*************************************************
+Lecture-5
+Data Modelling 
+
+what will be stored?
+username, password, pjhotos, dob, mobile no., etc.
+
+mongoose use kr rhe h
+data modelling k liye
+
+expensive:(used in coorporations)
+draw at moon modeler and it will give codes 
+moon modeler: https://www.datensen.com/data-modeling/moon-modeler-for-databases.html
+
+other options:
+eraser.io
+https://www.eraser.io/
+
+
+free option:
+pen and paper
+
+helper:
+prisma
+mongoose
+
+
+***********************************************************************************
+Lecture:- 10 (User and video model with hooks and JWT)
+
+index in modelling: to searching
+password is stored in database in encripted form, as db can get leaked
+
+mongo aggregation
+https://www.npmjs.com/package/mongoose-aggregate-paginate-v2
+
+mongoose middlewares pre, post 
+read from documentation
+
+based on crypography
+bcrypt  : used to hash the passwords
+jwt : for tokens
+
+cryptographic algorithms are used to encrypt/decrypt the passwords and tokens
+in them a secret key is used to make them unique
+
+to use them some mongoose hooks are used like pre (find more in mongoose>middleware>pre)
+userSchema.pre('save', callback)
+in this keep in mind not to wite arrow function as it don't have this (context) information
+
+to compare
+userSchema.methods.isPasswordCorrect
+
+
+JWT (http://www.jwt.io) || also can see github pageb
+it is bearer token: what it means it that jiske pass hote h unko access de do
+jsonwebtoken
+
+serect ke liye shark 256, 
+
+we are using sessions and cookies both (added security)
+access token is not stored in db, but refresh are 
+
+both are written in same way, we will learn about them in upcomming lectures 
+
+
+similiarly inke liye bhi function likh do 
+userSchema.methods.generateAccessToken = function(){}
+userSchema.methods.generateRefreshToken = function(){}
+
+ek usename aa gya to querry kr sakte hain
+
+
+*****************************************************************************************************************************
+LECTURE- 10 (Multer: upload file in backend)
+
+pdf upload, image upload and all others 
+it is all work of backend engineers
+
+multer 
+it npm package 
+
+2 steps setting
+firstly upload file on using multer on local server
+then upload it to cloudinary
+
+many have diff folder as services for cloudinary
+we will use utils
+
+import fs from "fs"
+fs is file system
+it is in core nodejs
+
+search in unlink in documentation (nodejs documentation)
+
+
+now setup a middleware using multer
+read multer docs --github wale
+
+
+multer file middleware
+we can also have difff image ids 
+
+*****************************************************************************************************************
+LECTURE - 12 (Controllers and Routing)
+
+wrapper function use kiya as baar baar try catch , promises nhi daalne pade, 
+
+write controller, routes in separate files and will import them not in index.js as we try to keep it clean
+so write in app.js file
+
+********************************************************************************************************************
+LECTURE - 13
+LOGIC BUILDING
+
+// get user details from frontend
+// validation - not empty
+// check if user already exists: username, email
+// check for images, check for avatar
+// upload them to cloudinary, avatar
+// create user object - create entry in db
+// remove password and refresh token field from response
+// check for user creation
+// return res
+
+data handle by json, req, res, postman
+but file handling is by multer
+
+for validation in production grade apps diff files are written and from them methods are called
+
+similiarly write code logic for all above 
+
+
+********************************************************************************************************************
+LECTURE - 14
+How to use postman
+
+in big tech companies Postman collection is shared
+
+in postman to post data use
+body>raw> [json] but in this json we can't snd file
+
+body>form-data>         click on ... dots and enable content-type
+
+
+good thing abot clodinary:
+if you don't send image then it just returns "" empty string
+
+*************************************************************************************************************************
+LECTURE -15
+LOGOUT, REFRESH AND ACCESS TOKENS BASICS
+
+both are used for authorization
+no need to have both always
+one is short term and other is long term expiry date
+
+
+IMP 
+how to write querry for finding either username or email for login (like instagram) from MONGODB
+
+
+access token given to user
+but refresh token is saved to database also so that baar refresh na karna pade
+
+***************
+logout
+
+how to logout properly?
+> by deleting access token, refresh token
+
+how to find the user
+:> we will add our middleware
+auth.midddleware.js
+
+
+if res is not used in middleware then you can write it as _    [PRODUCTION GRADE CODE]
+
+*************************************************************************************************************
+LECTURE - 16 
+TOKENS
+
+refresh token:- long lived, stored in database
+access token:- short lived, not stored in database, will be with user
+
+when access token is expired then user get 401, and then it should hit an endpoint which will give new access and refresh token after authentication
+by this user does not have to login again 
+
+
+kai jagah throw karna hi acha h error(API error hi  api response h yaha)
+200 ka fake response is very very very very bad thing
+
+*************
+options ko global me declare kar sakte hain
+*************
+
+
+************************************************************************************************
+LECTURE-17
+
+
+to test /login write in body>raw> and json
+
+
+database me raw token store hota h 
+user k pass jo jata h vo encrypted hota h 
+
+
+declare options {http, secure } as global
+
+
+
+updateaccountdetails:
+we can allow anyfield to be updated by the user
+
+files ko update alag se kro [PRODUCTION GRADE CODE]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Why utils?
+24:50 of video custom api response
+
+wrapper function to make our life easy

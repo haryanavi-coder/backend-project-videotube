@@ -52,6 +52,7 @@ const userSchema = new Schema(
     }
 )
 
+// middleware hook "pre" from mongoose is used // we have used regular function instead of arrow function as the former has reference to "this" keyword 
 userSchema.pre("save", async function (next) {
     if(!this.isModified("password")) return next();
 
@@ -59,6 +60,8 @@ userSchema.pre("save", async function (next) {
     next()
 })
 
+
+// custom method to check password send by user and encrypted password stored in database
 userSchema.methods.isPasswordCorrect = async function(password){
     return await bcrypt.compare(password, this.password)
 }
@@ -77,11 +80,12 @@ userSchema.methods.generateAccessToken = function(){
         }
     )
 }
+
+// refresh token has less payload (data)
 userSchema.methods.generateRefreshToken = function(){
     return jwt.sign(
         {
             _id: this._id,
-            
         },
         process.env.REFRESH_TOKEN_SECRET,
         {
